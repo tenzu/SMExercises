@@ -1,0 +1,2 @@
+# SMExercises
+Structure Mechanics Exercises
