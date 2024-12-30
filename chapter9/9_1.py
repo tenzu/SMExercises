@@ -6,3 +6,5 @@ t = 0.012
 q = 6.5 / 0.01
 D = c9m.cylindricalStiffness(t)
 print(D)
+Mb=c9m.bendingMomentFixedEnd(q,b)
+print(Mb)
