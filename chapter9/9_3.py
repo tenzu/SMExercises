@@ -9,12 +9,12 @@ TStar = 4750 / 0.01
 sigma_0Star = TStar / (1 * t)
 
 print(f"求解（a）：")
-print(f"计算中面压应力下的u*：")
+print(f"计算系数u*：")
 uStar = c9m.uStar(a, TStar, c9m.cylindricalStiffness(t))
 print(f"u* = {uStar:.4f}\n")
 print(f"计算B点挠度：")
-v_B = c9m.midSpanDeflection2(q / 2, a, c9m.E1(2e11, 0.3), t) * c9m.f0Star(uStar)
-print(f"v_B = {v_B:.4f} m = {v_B*1e3:.3f} mm\n")
+w_B = c9m.midSpanDeflection2(q / 2, a, c9m.E1(2e11, 0.3), t) * c9m.f0Star(uStar)
+print(f"w_B = {w_B:.4f} m = {w_B*1e3:.2f} mm\n")
 
 print(f"求解（b）：")
 print(f"计算B点弯矩：")

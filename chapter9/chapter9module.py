@@ -1,5 +1,6 @@
 # This is a module for chapter 9 exercises.
 from math import *
+from math import log10
 
 youngsModulus = 2e11
 poissonsRatio = 0.3
@@ -64,6 +65,15 @@ def u(span, inplaneForce, cylindricalStiffness):
 # 压力下 u* 的值
 def uStar(span, inplaneForce, cylindricalStiffness):
     return span / 2 * sqrt(inplaneForce / cylindricalStiffness)
+
+
+# 大挠度弯曲 U 的值
+def U(plateThickness, distributedLoad, span, K, youngsModulus=2e11, poissonsRatio=0.3):
+    return (
+        (youngsModulus / (1 - poissonsRatio**2) / distributedLoad) ** 2
+        * (plateThickness / span) ** 8
+        / K
+    )
 
 
 # 拉力弯矩辅助函数0
