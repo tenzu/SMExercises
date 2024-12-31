@@ -42,18 +42,42 @@ def midSpanDeflection1(distributedLoad, span, E1, plateThickness):
     return distributedLoad * span**4 / (384 * E1 * I1(plateThickness))
     # return distributedLoad*span**4/(384*cylindricalStiffness(plateThickness))
 
+
+# 两端简支梁跨中挠度
+def midSpanDeflection2(distributedLoad, span, E1, plateThickness):
+    return 5 * distributedLoad * span**4 / (384 * E1 * I1(plateThickness))
+
+
+# 两端简支梁跨中弯矩
+def bendingMomentMidSpan2(distributedLoad, span):
+    return -distributedLoad * span**2 / 8
+
+
 # u 的值
 def u(span, inplaneForce, cylindricalStiffness):
-    return span/2*sqrt(inplaneForce/cylindricalStiffness)
+    return span / 2 * sqrt(inplaneForce / cylindricalStiffness)
+
+
+# 拉力弯矩辅助函数0
+def phai0(u):
+    return (2 / u**2) * (1 - 1 / cosh(u))
+
 
 # 拉力弯矩辅助函数1
 def phai1(u):
-    return (6/u**2)*(1-u/sinh(u))
+    return (6 / u**2) * (1 - u / sinh(u))
+
 
 # 拉力弯矩辅助函数2
 def X(u):
-    return (3/u**2)*(u/tanh(u)-1)
+    return (3 / u**2) * (u / tanh(u) - 1)
+
 
 # 拉力挠度辅助函数
 def f1(u):
-    return 24/u**3*(u/2-tanh(u/2))
+    return 24 / u**3 * (u / 2 - tanh(u / 2))
+
+
+# 拉力挠度辅助函数
+def f0(u):
+    return (24 / 5 / u**4) * (u**2 / 2 + 1 / cosh(u) - 1)
