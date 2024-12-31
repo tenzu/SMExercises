@@ -49,3 +49,5 @@ print(f'M_B_complex = {M_B_complex :.2f} N*m\n')
 print(f'计算B点由复杂弯曲引起的正应力：')
 sigma_B_complex = c9m.bendingNormalStress(M_B_complex, t)
 print(f'sigma_B_complex = {sigma_0+sigma_B_complex :.2f} Pa = {(sigma_0+sigma_B_complex)*1e-6 :.2f} MPa\n')
+
+print(f'恭喜，求解完毕！')
