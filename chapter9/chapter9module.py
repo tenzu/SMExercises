@@ -13,14 +13,12 @@ def E1(youngsModulus=2e11, poissonsRatio=0.3):
 
 # 板条梁截面惯性矩
 def I1(plateThickness):
-    return plateThickness**3 / 12
+    return 1 * plateThickness**3 / 12
 
 
 # 筒形刚度
-# def cylindricalStiffness(plateThickness):
-#     return youngsModulus*plateThickness**3/(12*(1-poissonsRatio**2))
 def cylindricalStiffness(plateThickness):
-    return E1(youngsModulus, poissonsRatio) * plateThickness**3 / 12
+    return E1(youngsModulus, poissonsRatio) * I1(plateThickness)
 
 
 # 两端固支梁跨中弯矩
@@ -54,6 +52,11 @@ def bendingMomentMidSpan2(distributedLoad, span):
     return -distributedLoad * span**2 / 8
 
 
+# 由 u 计算 T
+def u2T(u, plateThickness, span):
+    return 4 * u**2 * cylindricalStiffness(plateThickness) / span**2
+
+
 """以下为辅助函数相关"""
 
 
@@ -68,7 +71,7 @@ def uStar(span, inplaneForce, cylindricalStiffness):
 
 
 # 大挠度弯曲 U 的值
-def U(plateThickness, distributedLoad, span, K, youngsModulus=2e11, poissonsRatio=0.3):
+def U(plateThickness, distributedLoad, span, K=0.5, youngsModulus=2e11, poissonsRatio=0.3):
     return (
         (youngsModulus / (1 - poissonsRatio**2) / distributedLoad) ** 2
         * (plateThickness / span) ** 8
