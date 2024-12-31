@@ -53,8 +53,16 @@ def bendingMomentMidSpan2(distributedLoad, span):
     return -distributedLoad * span**2 / 8
 
 
-# u 的值
+"""以下为辅助函数相关"""
+
+
+# 拉力下 u 的值
 def u(span, inplaneForce, cylindricalStiffness):
+    return span / 2 * sqrt(inplaneForce / cylindricalStiffness)
+
+
+# 压力下 u* 的值
+def uStar(span, inplaneForce, cylindricalStiffness):
     return span / 2 * sqrt(inplaneForce / cylindricalStiffness)
 
 
@@ -81,3 +89,13 @@ def f1(u):
 # 拉力挠度辅助函数
 def f0(u):
     return (24 / 5 / u**4) * (u**2 / 2 + 1 / cosh(u) - 1)
+
+
+# 压力挠度辅助函数
+def f0Star(uStar):
+    return 24 / 5 / uStar**4 * (1 / cos(uStar) - uStar**2 / 2 - 1)
+
+
+# 压力弯矩辅助函数
+def phai0Star(uStar):
+    return (2 / uStar**2) * (1 / cos(uStar) - 1)
