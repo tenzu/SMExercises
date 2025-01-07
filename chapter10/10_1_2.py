@@ -21,3 +21,6 @@ d1 = y1 - y0
 d2 = y0 - t / 2
 I0 = c10m.shiftAxisFormula(I1, A1, d1, I2, A2, d2)
 print(f"组合体截面惯性矩：{I0:.8f} m^4 = {I0*1e8:.2f} cm^4\n")
+lamda = c10m.lamdaSingleBeam(l, I0, (A1+A2))
+print(f"单跨梁柔度系数：{lamda:.1f}")
+print(f"柔度系数小于100，在非弹性范围内。")

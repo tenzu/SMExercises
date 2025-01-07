@@ -1,5 +1,6 @@
 # This is a module for chapter 10 exercises.
 from math import pi
+from math import sqrt
 
 youngsModulus = 2e11
 poissonsRatio = 0.3
@@ -27,3 +28,7 @@ def strengthCheck(stress, yieldStress=235):
         return "******** 应力超过材料屈服强度！********"
     else:
         return "********材料未屈服。********"
+
+# 单跨杆柔度系数
+def lamdaSingleBeam(L, I, A):
+    return L/sqrt(I/A)
