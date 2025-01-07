@@ -5,6 +5,7 @@ import sympy as sp
 
 youngsModulus = 2e11
 poissonsRatio = 0.3
+x = sp.Symbol("x")
 
 
 # 形心计算公式
@@ -38,5 +39,10 @@ def lamdaSingleBeam(L, I, A):
 
 
 # lamda to sigma_cr
-def lamda2Sigmacr(lamda, sigma_y=235, E=youngsModulus*1e-6):
+def lamda2Sigmacr(lamda, sigma_y=235, E=youngsModulus * 1e-6):
     return sigma_y - sigma_y**2 * lamda**2 / (4 * pi**2 * E)
+
+
+# 杆件弯曲应变能
+def beamBendingEnergy(v, I, lowerLimit, upperLimit, E=youngsModulus):
+    return 1 / 2 * sp.integrate(E * I * sp.diff(v, x, 2), (x, lowerLimit, upperLimit))
