@@ -16,3 +16,5 @@ V = (
     * sp.integrate(E * I * a1 * sp.diff(sp.sin(sp.pi * x / l), x, 2), (x, 0, 0.2 * l))
 )
 print(f"应变能：{V}")
+
+print(f"testing 3")
