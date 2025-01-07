@@ -26,9 +26,9 @@ def eularForceSingleBeam(I, L, E=youngsModulus):
 # 强度校验
 def strengthCheck(stress, yieldStress=235):
     if stress > yieldStress:
-        return "******** 应力超过材料屈服强度！********"
+        return "******** 应力超过材料屈服强度！*******"
     else:
-        return "********材料未屈服。********"
+        return "******** 材料未屈服。********"
 
 
 # 单跨杆柔度系数
