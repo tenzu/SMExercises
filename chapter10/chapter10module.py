@@ -19,8 +19,9 @@ def shiftAxisFormula(I1, A1, d1, I2, A2, d2):
 
 
 # 单跨梁欧拉力公式
-def eularForceSingleBeam(I, L,E =youngsModulus):
-    return pi**2*E*I/L**2
+def eularForceSingleBeam(I, L, E=youngsModulus):
+    return pi**2 * E * I / L**2
+
 
 # 强度校验
 def strengthCheck(stress, yieldStress=235):
@@ -29,6 +30,12 @@ def strengthCheck(stress, yieldStress=235):
     else:
         return "********材料未屈服。********"
 
+
 # 单跨杆柔度系数
 def lamdaSingleBeam(L, I, A):
-    return L/sqrt(I/A)
+    return L / sqrt(I / A)
+
+
+# lamda to sigma_cr
+def lamda2Sigmacr(lamda, sigma_y=235, E=youngsModulus*1e-6):
+    return sigma_y - sigma_y**2 * lamda**2 / (4 * pi**2 * E)
