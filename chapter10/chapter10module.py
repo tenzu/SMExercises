@@ -1,6 +1,7 @@
 # This is a module for chapter 10 exercises.
 from math import pi
 from math import sqrt
+import sympy as sp
 
 youngsModulus = 2e11
 poissonsRatio = 0.3
