@@ -45,4 +45,6 @@ def lamda2Sigmacr(lamda, sigma_y=235, E=youngsModulus * 1e-6):
 
 # 杆件弯曲应变能
 def beamBendingEnergy(v, I, lowerLimit, upperLimit, E=youngsModulus):
-    return 1 / 2 * sp.integrate(E * I * sp.diff(v, x, 2), (x, lowerLimit, upperLimit))
+    return (
+        1 / 2 * sp.integrate(E * I * sp.diff(v, x, 2) ** 2, (x, lowerLimit, upperLimit))
+    )
