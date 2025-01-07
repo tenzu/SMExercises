@@ -5,7 +5,8 @@ import sympy as sp
 x = sp.Symbol("x")
 a1 = sp.Symbol("a1")
 l = sp.Symbol("l", positive=True)
-v = a1 * sp.sin(sp.pi * x / l)
+# v = a1 * sp.sin(sp.pi * x / l)
+v = a1 * x * (l - x)
 E = sp.Symbol("E", positive=True)
 I0 = sp.Symbol("I0", positive=True)
 # x = 0时I1=0.4*I0,x=0.2*l时I1=I0
@@ -18,4 +19,4 @@ I3 = (-3 * I0 / l) * x + 3.4 * I0
 V1 = c10m.beamBendingEnergy(v, I1, 0, 0.2 * l, E)
 V2 = c10m.beamBendingEnergy(v, I2, 0.2 * l, 0.8 * l, E)
 V3 = c10m.beamBendingEnergy(v, I3, 0.8 * l, 1.0 * l, E)
-print("V1 =", V1)
+print(f"杆件弯曲应变能：{V1+V2+V3}")
