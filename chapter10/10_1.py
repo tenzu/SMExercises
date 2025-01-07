@@ -47,3 +47,4 @@ I0 = c10m.shiftAxisFormula(I1, A1, d1, I2, A2, d2)
 print(f"组合体截面惯性矩：{I0:.8f} m^4 = {I0*1e8:.2f} cm^4\n")
 
 print(f"testing!")
+print(f"testing 2")
