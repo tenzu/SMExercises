@@ -5,7 +5,6 @@ import sympy as sp
 x = sp.Symbol("x")
 a1 = sp.Symbol("a1")
 l = sp.Symbol("l", positive=True)
-# v = sp.Function('v')(x)
 v = a1 * sp.sin(sp.pi * x / l)
 E = sp.Symbol("E", positive=True)
 I = sp.Symbol("I", positive=True)
