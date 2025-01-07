@@ -20,3 +20,10 @@ def shiftAxisFormula(I1, A1, d1, I2, A2, d2):
 # 单跨梁欧拉力公式
 def eularForceSingleBeam(I, L,E =youngsModulus):
     return pi**2*E*I/L**2
+
+# 强度校验
+def strengthCheck(stress, yieldStress=235):
+    if stress > yieldStress:
+        return "******** 应力超过材料屈服强度！********"
+    else:
+        return "********材料未屈服。********"

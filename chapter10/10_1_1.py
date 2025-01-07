@@ -20,13 +20,15 @@ print(f"组合体形心高度：{y0:.3f} m = {y0*1e2:.2f} cm")
 d1 = y1 - y0
 d2 = y0 - t / 2
 I0 = c10m.shiftAxisFormula(I1, A1, d1, I2, A2, d2)
-print(f"组合体截面惯性矩：{I0:.8f} m^4 = {I0*1e8:.2f} cm^4\n")
+print(f"组合体截面惯性矩：{I0:.8f} m^4 = {I0*1e8:.2f} cm^4")
 
 # 计算单跨梁欧拉力
 T_E = c10m.eularForceSingleBeam(I0, l)
 print(f"单跨梁欧拉力：{T_E:.2f} N = {T_E*1e-6:.2f} MN")
 sigma_E = T_E / (A1 + A2)
-print(f"单跨梁欧拉应力：{sigma_E:.2f} Pa = {sigma_E*1e-6:.2f} MPa\n")
+print(f"单跨梁欧拉应力：{sigma_E:.2f} Pa = {sigma_E*1e-6:.2f} MPa")
+text = c10m.strengthCheck(sigma_E)
+print(f"{text}\n")
 
 print(f"求解（2）：")
 l = 2
@@ -45,10 +47,12 @@ print(f"组合体形心高度：{y0:.3f} m = {y0*1e2:.2f} cm")
 d1 = y1 - y0
 d2 = y0 - t / 2
 I0 = c10m.shiftAxisFormula(I1, A1, d1, I2, A2, d2)
-print(f"组合体截面惯性矩：{I0:.8f} m^4 = {I0*1e8:.2f} cm^4\n")
+print(f"组合体截面惯性矩：{I0:.8f} m^4 = {I0*1e8:.2f} cm^4")
 
 # 计算单跨梁欧拉力
 T_E = c10m.eularForceSingleBeam(I0, l)
 print(f"单跨梁欧拉力：{T_E:.2f} N = {T_E*1e-6:.2f} MN")
 sigma_E = T_E / (A1 + A2)
-print(f"单跨梁欧拉应力：{sigma_E:.2f} Pa = {sigma_E*1e-6:.2f} MPa\n")
+print(f"单跨梁欧拉应力：{sigma_E:.2f} Pa = {sigma_E*1e-6:.2f} MPa")
+text = c10m.strengthCheck(sigma_E)
+print(f"{text}\n")
