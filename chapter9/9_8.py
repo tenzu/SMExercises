@@ -23,3 +23,8 @@ sigma_eq = c9m.bendingNormalStress(M_eq, t)
 print(f"根据弯矩计算出板的应力为{abs(sigma_eq * 1e-6):.3f} MPa")
 
 print(f"---- 使用板条梁模型求解 ----")
+# 校验是否需要考虑弯曲引起的中面力
+w_bending = c9m.midSpanDeflection2(q, a, c9m.E1(), t)
+print(f"普通弯曲时板条梁的最大挠度：{w_bending:.3f} m = {w_bending*1e3:.2f} mm")
+print(f"0.2倍的板厚为：{0.2 * t*1e3:.2f} mm")
+print(f"普通弯曲挠度小于0.2倍板厚，因此不计弯曲引起的中面力。")
