@@ -1,9 +1,11 @@
 # This is a module for chapter 9 exercises.
 from math import *
 from math import log10
+import sympy as sp
 
 youngsModulus = 2e11
 poissonsRatio = 0.3
+x, y = sp.symbols("x y")
 
 
 # E1
@@ -71,7 +73,9 @@ def uStar(span, inplaneForce, cylindricalStiffness):
 
 
 # 大挠度弯曲 U 的值
-def U(plateThickness, distributedLoad, span, K=0.5, youngsModulus=2e11, poissonsRatio=0.3):
+def U(
+    plateThickness, distributedLoad, span, K=0.5, youngsModulus=2e11, poissonsRatio=0.3
+):
     return (
         (youngsModulus / (1 - poissonsRatio**2) / distributedLoad) ** 2
         * (plateThickness / span) ** 8
@@ -113,7 +117,26 @@ def f0Star(uStar):
 def phai0Star(uStar):
     return (2 / uStar**2) * (1 / cos(uStar) - 1)
 
-''' 以下为能量法相关 '''
+
+""" 以下为能量法相关 """
+
+
 # 板的弯曲应变能
-def plateStrainEnergy(w, plateThickness, possionsRatio = 0.3):
-    pass
+# !!!diff(w,x,y)有错误!!!
+def plateStrainEnergy(
+    w,
+    plateThickness,
+    xLowerLimit,
+    xUpperLimit,
+    ylowerLimit,
+    yUpperLimit,
+):
+    return (
+        cylindricalStiffness(plateThickness)
+        / 2
+        * sp.integrate(
+            (w.diff(x, 2) + w.diff(y, 2)) ** 2,
+            (x, xLowerLimit, xUpperLimit),
+            (y, ylowerLimit, yUpperLimit),
+        )
+    )
