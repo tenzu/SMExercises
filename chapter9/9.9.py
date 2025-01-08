@@ -15,3 +15,6 @@ print(f"x = 0 时：w = {w.subs(x,0)}， w' = {w.diff(x).subs(x,0)}， w'' = {w.
 print(f"x = a 时：w = {w.subs(x,a)}， w' = {w.diff(x).subs(x,a)}， w'' = {w.diff(x,2).subs(x,a)}")
 print(f"y = 0 时：w = {w.subs(y,0)}， w' = {w.diff(y).subs(y,0)}， w'' = {w.diff(y,2).subs(y,0)}")
 print(f"y = a 时：w = {w.subs(y,b)}， w' = {w.diff(y).subs(y,b)}， w'' = {w.diff(y,2).subs(y,b)}")
+
+# 计算总位能
+print(f"---- 计算应变能 ----")

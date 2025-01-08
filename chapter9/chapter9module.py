@@ -112,3 +112,8 @@ def f0Star(uStar):
 # 压力弯矩辅助函数
 def phai0Star(uStar):
     return (2 / uStar**2) * (1 / cos(uStar) - 1)
+
+''' 以下为能量法相关 '''
+# 板的弯曲应变能
+def plateStrainEnergy(w, plateThickness, possionsRatio = 0.3):
+    pass
