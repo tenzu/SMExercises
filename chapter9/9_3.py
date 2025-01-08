@@ -1,5 +1,7 @@
 import chapter9module as c9m
 
+print(f"********** 9.3题 **********")
+
 a = 0.6
 b = 2
 t = 0.014

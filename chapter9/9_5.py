@@ -1,5 +1,7 @@
 import sympy as sp
 
+print(f"********** 9.5题 **********")
+
 # 定义变量
 x, y = sp.symbols("x y")
 # 定义 w 为 x,y 的函数

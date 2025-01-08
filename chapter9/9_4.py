@@ -1,5 +1,7 @@
 import chapter9module as c9m
 
+print(f"********** 9.4题 **********")
+
 t = 0.6 * 1e-2
 l = 60 * 1e-2
 q = 10 / (1e-2)**2
