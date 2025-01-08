@@ -2,6 +2,7 @@ import chapter9module as c9m
 
 print(f"********** 9.8题 **********")
 
+print(f"---- 套公式求解 ----")
 t = 1 * 1e-2
 q = 5 * 1e4
 a = 40 * 1e-2  # 板条梁跨长
@@ -20,3 +21,5 @@ print(f"根据公式计算出板的最大弯矩为{M_eq:.3f} N*m")
 # 根据弯矩计算应力
 sigma_eq = c9m.bendingNormalStress(M_eq, t)
 print(f"根据弯矩计算出板的应力为{abs(sigma_eq * 1e-6):.3f} MPa")
+
+print(f"---- 使用板条梁模型求解 ----")
