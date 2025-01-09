@@ -38,3 +38,8 @@ print(f"此处可知 K<K_cr")
 # 计算Xj
 Xj = I*(miu/sp.pi)**4*(l/B)**3*b/B*1/i
 print(f"Xj = {Xj:.3f}")
+lamda = 0.540
+print(f"根据Xj查图可知 lamda = {lamda}")
+sigma_E = lamda * sigma_0
+print(f"根据lamda计算sigma_E = {sigma_E:.2f} MPa")
+print(f"因为 sigma_E > sigma_y，所以需要进行非弹性修正")
