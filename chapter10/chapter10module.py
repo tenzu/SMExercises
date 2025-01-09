@@ -48,3 +48,8 @@ def beamBendingEnergy(v, I, lowerLimit, upperLimit, E=youngsModulus):
     return (
         1 / 2 * sp.integrate(E * I * sp.diff(v, x, 2) ** 2, (x, lowerLimit, upperLimit))
     )
+
+
+# 悬臂梁刚度系数
+def cantileverStiffness(I, L, E=youngsModulus):
+    return 3 * E * I / L**3
