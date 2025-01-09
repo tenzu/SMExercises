@@ -10,7 +10,7 @@ l = sp.Symbol("l", positive=True)
 v = a1 * x * (l - x)
 E = sp.Symbol("E", positive=True)
 I0 = sp.Symbol("I0", positive=True)
-T = sp.Symbol("T", positive=True) # 本章默认杆件轴向压力为正
+T = sp.Symbol("T", positive=True)  # 本章默认杆件轴向压力为正
 # x = 0时I1=0.4*I0,x=0.2*l时I1=I0
 I1 = (3 * I0 / l) * x + 0.4 * I0
 I2 = I0
@@ -25,11 +25,11 @@ V = V1 + V2 + V3
 print(f"杆件弯曲应变能：{V}")
 
 # 计算杆件力函数
-U = 1/2 * sp.integrate(T*sp.diff(v,x)**2, (x, 0, l))
+U = 1 / 2 * sp.integrate(T * sp.diff(v, x) ** 2, (x, 0, l))
 print(f"杆件力函数：{U}")
 
 # 另总位能对系数求偏导等于零
 PI = V - U
-equation = sp.Eq(sp.diff(PI,a1),0)
-T = sp.solve(equation,T)
+equation = sp.Eq(sp.diff(PI, a1), 0)
+T = sp.solve(equation, T)
 print(f"杆件欧拉力：{T} N")
