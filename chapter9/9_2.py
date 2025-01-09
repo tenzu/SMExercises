@@ -1,6 +1,6 @@
 import chapter9module as c9m
 
-print(f"********** 9.2题 **********")
+print(f"********** 9.2题 **********\n")
 
 l = 0.8
 t = 0.02
@@ -16,19 +16,19 @@ print(f"固不需要考虑板条梁弯曲引起的中面力。\n")
 
 print(f"计算系数u：")
 u = c9m.u(l, T, c9m.cylindricalStiffness(t))
-print(f"u = {u :.3f}")
+print(f"u = {u :.3f}\n")
 print(f"计算复杂弯曲板条梁跨中挠度：")
 w_max_complex = w_max * c9m.f0(u)
 print(f"v_max_complex = {w_max_complex :.4f} m = {w_max_complex * 1e3 :.3f} mm\n")
 
 print(f"计算A点弯矩：")
 M_A = c9m.bendingMomentMidSpan2(q, l) * c9m.phai0(u)
-print(f"M_A = {M_A :.4f} N*m")
+print(f"M_A = {M_A :.4f} N*m\n")
 print(f"计算A点上表面正应力：")
 sigma_A_top = sigma_0 - abs(c9m.bendingNormalStress(M_A, t))
-print(f"sigma_A = {sigma_A_top :.4f} Pa = {sigma_A_top * 1e-6 :.3f} MPa (拉应力)")
+print(f"sigma_A = {sigma_A_top :.4f} Pa = {sigma_A_top * 1e-6 :.3f} MPa (拉应力)\n")
 print(f"计算A点下表面正应力：")
 sigma_A_bottom = sigma_0 + abs(c9m.bendingNormalStress(M_A, t))
-print(f"sigma_A = {sigma_A_bottom :.4f} Pa = {sigma_A_bottom * 1e-6 :.3f} MPa (拉应力)")
+print(f"sigma_A = {sigma_A_bottom :.4f} Pa = {sigma_A_bottom * 1e-6 :.3f} MPa (拉应力)\n")
 
-print(f"恭喜，求解完毕！")
+print(f"求解完毕！")

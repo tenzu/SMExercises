@@ -1,6 +1,6 @@
 import sympy as sp
 
-print(f"********** 9.5题 **********")
+print(f"********** 9.5题 **********\n")
 
 # 定义变量
 x, y = sp.symbols("x y")
