@@ -5,7 +5,22 @@ import sympy as sp
 
 youngsModulus = 2e11
 poissonsRatio = 0.3
-x = sp.Symbol("x")
+x, y = sp.symbols("x y")
+
+
+# E1
+def E1(youngsModulus=2e11, poissonsRatio=0.3):
+    return youngsModulus / (1 - poissonsRatio**2)
+
+
+# 板条梁截面惯性矩
+def I1(plateThickness):
+    return 1 * plateThickness**3 / 12
+
+
+# 筒形刚度
+def cylindricalStiffness(plateThickness):
+    return E1(youngsModulus, poissonsRatio) * I1(plateThickness)
 
 
 # 形心计算公式
