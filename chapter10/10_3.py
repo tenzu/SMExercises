@@ -32,4 +32,4 @@ print(f"杆件力函数：{U}")
 PI = V - U
 equation = sp.Eq(sp.diff(PI,a1),0)
 T = sp.solve(equation,T)
-print(f"杆件弯曲应变系数：{T}")
+print(f"杆件欧拉力：{T} N")
