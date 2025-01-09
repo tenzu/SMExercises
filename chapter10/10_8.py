@@ -43,3 +43,6 @@ print(f"根据Xj查图可知 lamda = {lamda}")
 sigma_E = lamda * sigma_0
 print(f"根据lamda计算sigma_E = {sigma_E:.2f} MPa")
 print(f"因为 sigma_E > sigma_y，所以需要进行非弹性修正")
+phai_Xj = I*(miu/sp.pi)**4*(l/B)**3*b/B/i
+print(f"phai*Xj = {phai_Xj:.3f}")
+print(f"根据附录F的表格插值得到：sigma_cr = 212 MPa")
