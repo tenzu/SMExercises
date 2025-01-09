@@ -1,7 +1,7 @@
 import chapter10module as c10m
 import sympy as sp
 
-print(f"********** 10.5 **********")
+print(f"********** 10.5题 **********")
 print(f"********** 使用能量法求解 **********")
 # 定义变量
 x = sp.Symbol("x")
