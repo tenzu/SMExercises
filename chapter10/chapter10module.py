@@ -58,3 +58,8 @@ def cantileverStiffness(I, L, E=youngsModulus):
 # Xj计算公式
 def Xj(K, I, L, E=youngsModulus):
     return K / (sp.pi**4 * E * I / L**3)
+
+
+# 横梁临界刚度
+def K_cr(phai, Xj, I, L, E=youngsModulus):
+    return phai * Xj * sp.pi**4 * E * I / L**3
