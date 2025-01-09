@@ -3,7 +3,7 @@ from math import pi
 from math import sqrt
 import sympy as sp
 
-youngsModulus = 2e11
+youngsModulus = 2.1e11
 poissonsRatio = 0.3
 x, y = sp.symbols("x y")
 
