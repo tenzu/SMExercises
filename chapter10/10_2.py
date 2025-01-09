@@ -1,4 +1,6 @@
 import chapter10module as c10m
+ 
+print(f"********** 10.2题 **********")
 
 l = 5
 P = 300000

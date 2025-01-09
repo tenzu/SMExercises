@@ -1,6 +1,7 @@
 import chapter10module as c10m
 import sympy as sp
 
+print(f"********** 10.3题 **********")
 # 定义变量
 x = sp.Symbol("x")
 a1 = sp.Symbol("a1")
