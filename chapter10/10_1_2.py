@@ -63,3 +63,5 @@ sigma_cr = c10m.lamda2Sigmacr(lamda, 235)
 print(f"单跨梁临界应力为\t{sigma_cr:.2f} MP")
 text = c10m.strengthCheck(sigma_cr)
 print(f"{text}\n")
+
+print(f"求解完毕！")
