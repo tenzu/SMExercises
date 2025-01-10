@@ -25,7 +25,7 @@ print(f"组合体截面惯性矩为\t{I0*1e8:.2f} cm^4\n")
 
 # 计算单跨梁欧拉力
 T_E = c10m.eularForceSingleBeam(I0, l)
-print(f"单跨梁欧拉力为\t{T_E*1e-6:.2f} MN")
+print(f"单跨梁欧拉力为\t{T_E*1e-6:.2f} MN\n")
 sigma_E = T_E / (A1 + A2)
 print(f"单跨梁欧拉应力为\t{sigma_E*1e-6:.2f} MPa")
 text = c10m.strengthCheck(sigma_E)
@@ -43,18 +43,18 @@ I2 = 50 * 0.6**3 / 12 * 1e-8  # 带板截面惯性矩，带板宽度按1.0倍扶
 y1 = t + 6.29 * 1e-2  # 查表得到球扁钢形心高度
 y2 = t / 2  # 带板高度为板厚的一半
 y0 = c10m.centroidofAreas(A1, y1, A2, y2)
-print(f"组合体形心高度为\t{y0*1e2:.2f} cm\n")
+print(f"组合体形心高度 y0为\t{y0*1e2:.2f} cm\n")
 
 d1 = y1 - y0
 d2 = y0 - t / 2
 I0 = c10m.shiftAxisFormula(I1, A1, d1, I2, A2, d2)
-print(f"组合体截面惯性为\t{I0*1e8:.2f} cm^4\n")
+print(f"组合体截面惯性矩 I0 为\t{I0*1e8:.2f} cm^4\n")
 
 # 计算单跨梁欧拉力
 T_E = c10m.eularForceSingleBeam(I0, l)
-print(f"单跨梁欧拉力为\t{T_E*1e-6:.2f} MN")
+print(f"单跨梁欧拉力 T_E 为\t{T_E*1e-6:.2f} MN\n")
 sigma_E = T_E / (A1 + A2)
-print(f"单跨梁欧拉应力为\t{sigma_E*1e-6:.2f} MPa")
+print(f"单跨梁欧拉应力 sigma_E 为\t{sigma_E*1e-6:.2f} MPa")
 text = c10m.strengthCheck(sigma_E)
 print(f"{text}\n")
 print(f"求解完毕！")
