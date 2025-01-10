@@ -33,3 +33,5 @@ PI = V - U
 equation = sp.Eq(sp.diff(PI, a1), 0)
 T = sp.solve(equation, T)
 print(f"杆件欧拉力 T 为\t{T}\n")
+
+print(f"求解完毕！")
