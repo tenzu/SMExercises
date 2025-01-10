@@ -21,19 +21,19 @@ print(f"查图可知：miu = {miu}")
 
 # 计算横梁刚度系数K
 K = miu**4 * E * I * b / B**4
-print(f"横梁刚度系数K = {K:.2f} N/m")
+print(f"横梁刚度系数K为\t{K:.2f} N/m")
 # 计算对应的单跨梁欧拉应力
 sigma_0 = c10m.eularForceSingleBeam(i, l, E) / A * 1e-6
-print(f"对应的单跨梁欧拉应力sigma_0 = {sigma_0:.2f} MPa")
+print(f"对应的单跨梁欧拉应力sigma_0为\t{sigma_0:.2f} MPa")
 
 # 计算连续梁跨数
 n = L / l
-print(f"连续梁跨数n = {n}")
+print(f"连续梁跨数n为\t{n}")
 Xj_max = 0.364
-print(f"n = 5时，临界刚度对应的 Xj_max 为：{Xj_max:.3f}")
+print(f"n = 5时，临界刚度对应的 Xj_max 为\t{Xj_max:.3f}")
 # 计算临界刚度
 K_cr = c10m.K_cr(1.0, Xj_max, i, l, E)
-print(f"临界刚度K_cr = {K_cr:.2f} N/m")
+print(f"临界刚度K_cr为\t{K_cr:.2f} N/m")
 print(f"此处可知 K<K_cr")
 # 计算Xj
 Xj = I*(miu/sp.pi)**4*(l/B)**3*b/B*1/i

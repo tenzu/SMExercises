@@ -20,14 +20,14 @@ l2 = l0
 V1 = c10m.beamBendingEnergy(v, I1, 0, l1, E)
 V2 = c10m.beamBendingEnergy(v, I2, l1, l1 + l2, E)
 V = V1 + V2
-print(f"应变能：{V}")
+print(f"应变能为\t{V}")
 
 # 计算杆件力函数
 U = 1 / 2 * sp.integrate(T * sp.diff(v, x) ** 2, (x, 0, l1 + l2))
-print(f"杆件力函数：{U}")
+print(f"杆件力函数为\t{U}")
 
 # 另总位能对系数求偏导等于零
 PI = V - U
 equation = sp.Eq(sp.diff(PI, a1), 0)
 T = sp.solve(equation, T)
-print(f"杆件欧拉力：{T} N") # 68/21*E*I/l0**2
+print(f"杆件欧拉力为\t{T} N") # 68/21*E*I/l0**2
