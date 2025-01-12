@@ -26,7 +26,7 @@ print(f"应变能 V 为\t{V}\n")
 U = 1 / 2 * sp.integrate(T * sp.diff(v, x) ** 2, (x, 0, l1 + l2))
 print(f"杆件力函数 U 为\t{U}\n")
 
-# 另总位能对系数求偏导等于零
+# 令总位能对系数的一阶偏导等于零
 PI = V - U
 equation = sp.Eq(sp.diff(PI, a1), 0)
 T = sp.solve(equation, T)
