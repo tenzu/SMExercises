@@ -15,10 +15,10 @@ print(f"悬臂梁刚度系数K为\t{K * 1e-3:.2f} kN/m")  # 1250000/3
 
 print(f"求解（b）：")
 # 查附录G
-print(f"查附录G得3跨梁弹性制作达到临界刚度时lamda = 1.0")
 lamda = 1.0
-print(f"此时Xj_max = 0.302")
+print(f"查附录G得3跨梁弹性制作达到临界刚度时 lambda = 1.0")
 Xj_max = 0.302
+print(f"此时 Xj_max = 0.302")
 # 对应的单跨梁欧拉应力
 sigma_0 = c10m.eularForceSingleBeam(longitudinal_I, longitudinal_L) / longitudinal_A
 print(f"对应的单跨梁欧拉应力为\t{sigma_0 * 1e-6:.3f} MPa")
@@ -27,7 +27,6 @@ print(f"对应的单跨梁欧拉应力为\t{sigma_0 * 1e-6:.3f} MPa")
 sigma_cr = sp.Symbol("sigma_cr", positive=True)
 phai = sp.Symbol("phai", positive=True)
 sigma_y = 400  # MPa
-# 计算lamda
 # 列出方程
 eq1 = sp.Eq(lamda, sigma_cr / (phai * sigma_0 / 1e6))
 eq2 = sp.Eq(phai, 4 * (sigma_y - sigma_cr) * sigma_cr / sigma_y**2)
