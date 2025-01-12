@@ -9,18 +9,17 @@ K = 0.5
 
 w_max = c9m.midSpanDeflection2(q, l, c9m.E1(), t)
 print(f"板条梁仅受横荷重时的最大挠度 w_max 为\t{w_max*1e3:.2f} mm")
-print(f"w_max/t = {w_max/t :.4f}，远于1/5")
+print(f"w_max/t = {w_max/t :.4f}，远大于1/5")
 print(f"固需要考虑板条梁弯曲引起的中面力，且应采用大挠度弯曲理论。\n")
 
 U = c9m.U(t, q, l, K)
-print(f"U ={U:.6f}")
-print(f"查图前计算lg10^4*sqrt(U)")
+print(f"U = {U:.6f}")
+print(f"查图前需先计算lg10^4*sqrt(U)")
 UU = c9m.log10(10**4 * c9m.sqrt(U))
 print(f"lg10^4*sqrt(U) = {UU:.2f}")
 u = 3.01
 print(f"查图得 u = {u:.2f}\n")
 
-print(f"根据 u 计算板条梁中面应力：")
 T = 4 * u**2 * c9m.cylindricalStiffness(t) / l**2
 print(f"根据 u 计算板条梁中面力 T 为\t{T:.4f} N")
 sigma_0 = T / 1 / t
