@@ -1,65 +1,86 @@
-'''
-本程序用于分析往届《结构力学（2）》的成绩
-'''
-
-# Version 1.0, 顺序执行代码完成对应功能
+# 本程序用于分析往届《结构力学（2）》的成绩
 
 import os
 import pandas as pd
-# import numpy as np
-import matplotlib.pyplot as plt
+from matplotlib import pyplot as plt
 
-# 获取当前 Python 文件所在的目录
-current_path = os.path.dirname(os.path.abspath(__file__))
+path = "./"
+files = os.listdir(path)
 
-# 列出当前路径下的所有文件
-files = os.listdir(current_path)
+# 定义读入单个文件生成 DataFrame 的函数
+def readFile(fileName):
+    data = pd.read_csv(fileName, sep="\t")
+    return data
 
-# 定义空的 DataFrame
-df = pd.DataFrame()
 
-# 依次读取所有txt文件，并将数据添加到 DataFrame 中
-for file in files:
-    if file.endswith('.txt'):
-        # 读取文件内容，跳过第一行，按空格分割
-        with open(os.path.join(current_path, file), 'r') as f:
-            lines = f.readlines()[1:]
-            data = [line.strip().split() for line in lines]
-            # 每行数据从第一列数字起分别表示：序号，学号，姓名，修读类别，期末成绩，平时成绩，总评成绩，最终成绩，绩点，是否通过，状态
-            pd_data = pd.DataFrame(data, columns=['序号', '学号', '姓名', '修读类别', '期末成绩', '平时成绩', '总评成绩', '最终成绩', '绩点', '是否通过', '状态'])
-            # 最后增加一列表示学期号
-            pd_data['学期号'] = file.split('.')[0]
-            # 将 DataFrame 合并到总的 DataFrame 中
-            df = pd.concat([df, pd_data], ignore_index=True)
+# 定义读入全部文件生成 DataFrame 的函数
+def readFiles(files):
+    data = pd.DataFrame()
+    for file in files:
+        # 判断文件是否以 .txt 结尾
+        if file.endswith(".txt"):
+            data = pd.concat([data, readFile(file)])
+    return data
 
-# 打印前3行和后3行数据
-# print(df.head(3))
-# print(df.tail(3))
 
-while True:
-    # 选择需要分析的学期号
-    print('请选择需要分析的学期号：')
-    for i in range(len(df['学期号'].unique())):
-        print(f'{i+1}. {df["学期号"].unique()[i]}')
+# 选择程序运行方式
+# 输入1：读入指定文件名的文件，输入2：读入全部文件，输入其他内容退出程序
+def main():
+    print("输入1：读入指定文件名的文件，输入2：读入全部文件，输入其他内容退出程序")
     choice = input()
-    if choice.isdigit() and int(choice) in range(1, len(df['学期号'].unique())+1):
-        break
+    if choice == "1":
+        fileName = input("请输入文件名：") + ".txt"
+        # 生成 DataFrame
+        data = readFile(fileName)
+        return data
+    elif choice == "2":
+        data = readFiles(files)
+        return data
     else:
-        print('输入有误，请重新输入！')
+        exit()
+    return data
 
-# 选择的学期号
-selected_semester = df['学期号'].unique()[int(choice)-1]
+# 将 main() 执行结果赋值给 df
+df = main()
 
-# 筛选出该学期的数据
-semester_data = df[df['学期号'] == selected_semester]
+# 清洗数据
+# 重新生成 index 从 0 开始
+df = df.reset_index(drop=True)
+len1 = len(df)
+# 去除”期末成绩“不是数字的行
+df = df[pd.to_numeric(df["期末成绩"], errors="coerce").notnull()]
+# 将”期末成绩“、”平时成绩“、”最终成绩“转换为数值型
+df["期末成绩"] = pd.to_numeric(df["期末成绩"], errors="coerce")
+df["平时成绩"] = pd.to_numeric(df["平时成绩"], errors="coerce")
+df["最终成绩"] = pd.to_numeric(df["最终成绩"], errors="coerce")
+len2 = len(df)
+print(f"初始数据一共有 {len1} 条，清洗后一共有 {len2} 条数据")
 
-# 打印最终成绩最小值、最大值
-print(f'该学期的最终成绩最小值：{semester_data["最终成绩"].min()}')
-print(f'该学期的最终成绩最大值：{semester_data["最终成绩"].max()}')
+# 当前有效成绩总数
+print(f"当前有效成绩共 {len2} 条记录")
+# 列出平时成绩平均值和标准差，列出总评成绩平均值和标准差，列出最终成绩平均值和标准差
+print(
+    f"平时成绩：平均值 = {df["平时成绩"].mean():.2f}, 标准差 = {df["平时成绩"].std():.2f}"
+)
+print(
+    f"期末成绩：平均值 = {df["期末成绩"].mean():.2f}, 标准差 = {df["期末成绩"].std():.2f}"
+)
+print(
+    f"最终成绩：平均值 = {df["最终成绩"].mean():.2f}, 标准差 = {df["最终成绩"].std():.2f}"
+)
 
-# 绘制最终成绩分布直方图
-plt.hist(semester_data['最终成绩'], bins=10, edgecolor='black', linewidth=1.2)
-plt.xlabel('最终成绩')
-plt.ylabel('人数')
-plt.title(f'该学期的最终成绩分布直方图（{selected_semester}）')
+# 绘制最终成绩直方图，显示均值、方差、标准差
+plt.hist(df["最终成绩"], bins=20, edgecolor="black")
+plt.xlabel("Final Score")
+plt.ylabel("Number of Students")
+plt.title("Final Score Distribution")
+plt.axvline(df["最终成绩"].mean(), color="red", linestyle="--", label="mean value")
+plt.axvline(
+    df["最终成绩"].mean() + df["最终成绩"].std(),
+    color="green",
+    linestyle="--",
+    label="mean value ± std",
+)
+plt.axvline(df["最终成绩"].mean() - df["最终成绩"].std(), color="green", linestyle="--")
+plt.legend()
 plt.show()
