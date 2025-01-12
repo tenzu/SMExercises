@@ -28,13 +28,13 @@ print(f"对应的单跨梁欧拉应力sigma_0为\t{sigma_0:.2f} MPa")
 
 # 计算连续梁跨数
 n = L / l
-print(f"连续梁跨数n为\t{n}")
+print(f"连续梁跨数 n 为\t{n}")
 Xj_max = 0.364
 print(f"n = 5时，临界刚度对应的 Xj_max 为\t{Xj_max:.3f}")
 # 计算临界刚度
 K_cr = c10m.K_cr(1.0, Xj_max, i, l, E)
-print(f"临界刚度K_cr为\t{K_cr:.2f} N/m")
-print(f"此处可知 K<K_cr")
+print(f"临界刚度 K_cr 为\t{K_cr:.2f} N/m")
+print(f"此处可知 K < K_cr")
 # 计算Xj
 Xj = I*(miu/sp.pi)**4*(l/B)**3*b/B*1/i
 print(f"Xj = {Xj:.3f}")
