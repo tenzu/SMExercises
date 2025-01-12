@@ -7,3 +7,7 @@ Structure Mechanics Exercises
 
 20241231
 第一版还是先用函数凑合一下拉倒。
+
+20250112
+1. 加上了 ipynb 版本
+2. sympy 求函数的二阶偏导有 bug，导致部分公式推导的题无法进行下去
