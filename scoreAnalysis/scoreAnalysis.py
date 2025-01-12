@@ -1,52 +1,50 @@
-# 本程序用于分析往届《结构力学（2）》的成绩
+# # 本程序用于分析往届《结构力学（2）》的成绩
 
 import os
 import pandas as pd
 from matplotlib import pyplot as plt
 
+
 path = "./"
 files = os.listdir(path)
 
+# 定义读入文件生成 DataFrame 的函数
+
 # 定义读入单个文件生成 DataFrame 的函数
 def readFile(fileName):
-    data = pd.read_csv(fileName, sep="\t")
-    return data
+    df = pd.read_csv(fileName, sep="\t")
+    return df
 
 
 # 定义读入全部文件生成 DataFrame 的函数
 def readFiles(files):
-    data = pd.DataFrame()
+    df = pd.DataFrame()
     for file in files:
         # 判断文件是否以 .txt 结尾
         if file.endswith(".txt"):
-            data = pd.concat([data, readFile(file)])
-    return data
+            df = pd.concat([df, readFile(file)])
+    return df
 
-
-# 选择程序运行方式
 # 输入1：读入指定文件名的文件，输入2：读入全部文件，输入其他内容退出程序
 def main():
     print("输入1：读入指定文件名的文件，输入2：读入全部文件，输入其他内容退出程序")
     choice = input()
     if choice == "1":
         fileName = input("请输入文件名：") + ".txt"
-        # 生成 DataFrame
-        data = readFile(fileName)
-        return data
+        df = readFile(fileName)
     elif choice == "2":
-        data = readFiles(files)
-        return data
+        df = readFiles(files)
     else:
         exit()
-    return data
+    return df
 
-# 将 main() 执行结果赋值给 df
+
 df = main()
 
-# 清洗数据
 # 重新生成 index 从 0 开始
 df = df.reset_index(drop=True)
 len1 = len(df)
+# 清洗数据
 # 去除”期末成绩“不是数字的行
 df = df[pd.to_numeric(df["期末成绩"], errors="coerce").notnull()]
 # 将”期末成绩“、”平时成绩“、”最终成绩“转换为数值型
