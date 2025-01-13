@@ -10,13 +10,12 @@ files = os.listdir(path)
 
 # 定义读入文件生成 DataFrame 的函数
 
+
 # 定义读入单个文件生成 DataFrame 的函数
 def readFile(fileName):
     df = pd.read_csv(fileName, sep="\t")
     return df
 
-aaa = readFile("23241.txt")
-print(aaa.head(10))
 
 # 定义读入全部文件生成 DataFrame 的函数
 def readFiles(files):
@@ -26,6 +25,7 @@ def readFiles(files):
         if file.endswith(".txt"):
             df = pd.concat([df, readFile(file)])
     return df
+
 
 # 输入1：读入指定文件名的文件，输入2：读入全部文件，输入其他内容退出程序
 def main():
@@ -42,6 +42,7 @@ def main():
 
 
 df = main()
+print(df.head())
 
 # 重新生成 index 从 0 开始
 df = df.reset_index(drop=True)
