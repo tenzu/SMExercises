@@ -42,7 +42,7 @@ def main():
 
 
 df = main()
-print(df.head())
+# print(df.head())
 
 # 重新生成 index 从 0 开始
 df = df.reset_index(drop=True)
