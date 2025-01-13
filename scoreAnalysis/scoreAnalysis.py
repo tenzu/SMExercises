@@ -15,6 +15,8 @@ def readFile(fileName):
     df = pd.read_csv(fileName, sep="\t")
     return df
 
+aaa = readFile("23241.txt")
+print(aaa.head(10))
 
 # 定义读入全部文件生成 DataFrame 的函数
 def readFiles(files):
