@@ -1,4 +1,5 @@
 import chapter10module as c10m
+# import my_modules as c10m
 
 print(f"********** 10.1题 **********")
 print(f"********** 线弹性稳定性的解 **********")
