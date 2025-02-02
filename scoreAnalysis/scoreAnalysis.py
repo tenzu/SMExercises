@@ -29,6 +29,10 @@ def readFiles(files):
 
 # 输入1：读入指定文件名的文件，输入2：读入全部文件，输入其他内容退出程序
 def main():
+    print("可选择的文件名包括:")
+    readFileNames = [file.split(".")[0] for file in files if file.endswith(".txt")]
+    for fileName in readFileNames:
+        print(fileName)
     print("输入1：读入指定文件名的文件，输入2：读入全部文件，输入其他内容退出程序")
     choice = input()
     if choice == "1":
@@ -71,16 +75,17 @@ print(
 )
 
 # 绘制最终成绩直方图，显示均值、方差、标准差
-plt.hist(df["最终成绩"], bins=20, edgecolor="black")
-plt.xlabel("Final Score")
-plt.ylabel("Number of Students")
-plt.title("Final Score Distribution")
-plt.axvline(df["最终成绩"].mean(), color="red", linestyle="--", label="mean value")
+plt.rcParams["font.sans-serif"] = ["STHeiti"]  # 用来正常显示中文标签
+plt.hist(df["最终成绩"], bins=25, edgecolor="black", histtype="bar", alpha=0.7)
+plt.xlabel("最终成绩")
+plt.ylabel("学生数量")
+plt.title("最终成绩分布图")
+plt.axvline(df["最终成绩"].mean(), color="red", linestyle="--", label="期望值")
 plt.axvline(
     df["最终成绩"].mean() + df["最终成绩"].std(),
     color="green",
     linestyle="--",
-    label="mean value ± std",
+    label="期望值 ± 标准差",
 )
 plt.axvline(df["最终成绩"].mean() - df["最终成绩"].std(), color="green", linestyle="--")
 plt.legend()
