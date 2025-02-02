@@ -90,3 +90,49 @@ plt.axvline(
 plt.axvline(df["最终成绩"].mean() - df["最终成绩"].std(), color="green", linestyle="--")
 plt.legend()
 plt.show()
+
+# 采用决策树回归算法根据平时成绩预测期末成绩
+from sklearn.tree import DecisionTreeRegressor
+from sklearn.model_selection import train_test_split
+
+# 划分训练集和测试集
+X = df[["平时成绩"]]
+y = df[["期末成绩"]]
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.05, shuffle=True, random_state=42
+)
+
+
+# 定义预测函数
+def predict(X_train, X_test, y_train, y_test):
+    regressor = DecisionTreeRegressor(random_state=0)
+    regressor.fit(X_train, y_train)
+    y_pred = regressor.predict(X_test)
+    return y_pred
+
+
+# 评估模型效果
+from sklearn.metrics import mean_squared_error, r2_score
+
+
+def evaluate(y_test, y_pred):
+    mse = mean_squared_error(y_test, y_pred)
+    r2 = r2_score(y_test, y_pred)
+    print(f"均方误差 (MSE) = {mse:.2f}")
+    print(f"决定系数 (R^2) = {r2:.2f}")
+
+
+# 调用预测函数和评估函数
+y_pred = predict(X_train, X_test, y_train, y_test)
+evaluate(y_test, y_pred)
+
+# 计算平时成绩和期末成绩的相关系数
+corr = df[["平时成绩", "期末成绩"]].corr().iloc[0, 1]
+print(f"平时成绩和期末成绩的相关系数为 {corr:.2f}")
+
+# 绘制平时成绩和期末成绩散点图
+plt.scatter(df["平时成绩"], df["期末成绩"], alpha=0.7)
+plt.xlabel("平时成绩")
+plt.ylabel("期末成绩")
+plt.title("平时成绩和期末成绩散点图")
+plt.show()
