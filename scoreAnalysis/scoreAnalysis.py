@@ -91,7 +91,6 @@ plt.axvline(df["最终成绩"].mean() - df["最终成绩"].std(), color="green",
 plt.legend()
 plt.show()
 
-
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 from sklearn.preprocessing import PolynomialFeatures
@@ -100,13 +99,14 @@ from sklearn.svm import SVR
 from sklearn.metrics import r2_score, mean_squared_error, mean_absolute_error
 
 # 特征和目标变量
-X = df[["平时成绩", "期末成绩"]]
-y = df["最终成绩"]
+X = df[["平时成绩"]]
+y = df["期末成绩"]
 
 # 划分训练集和测试集
 X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.2, random_state=666
+    X, y, test_size=0.2, random_state=66611
 )
+
 
 # 线性回归
 lr = LinearRegression()
@@ -115,32 +115,26 @@ y_pred = lr.predict(X_test)
 
 # 多项式回归
 poly = PolynomialFeatures(degree=2)
-X_train_poly = poly.fit_transform(X_train)
-X_test_poly = poly.transform(X_test)
+X_poly = poly.fit_transform(X_train)
 lr_poly = LinearRegression()
-lr_poly.fit(X_train_poly, y_train)
-y_pred_poly = lr_poly.predict(X_test_poly)
+lr_poly.fit(X_poly, y_train)
+y_pred_poly = lr_poly.predict(poly.fit_transform(X_test))
 
 # 决策树回归
-tree = DecisionTreeRegressor(random_state=666)
+tree = DecisionTreeRegressor()
 tree.fit(X_train, y_train)
 y_pred_tree = tree.predict(X_test)
 
 # 支持向量回归
-svr = SVR(kernel="rbf")
+svr = SVR()
 svr.fit(X_train, y_train)
 y_pred_svr = svr.predict(X_test)
 
 # 在一个DataFrame中存储所有模型的评价结果并打印
 evaluations = pd.DataFrame(
     {
-        "模型": [
-            "线性回归",
-            "多项式回归",
-            "决策树回归",
-            "支持向量回归",
-        ],
-        "R²": [
+        "模型": ["线性回归", "多项式回归", "决策树回归", "支持向量回归"],
+        "R-squared": [
             r2_score(y_test, y_pred),
             r2_score(y_test, y_pred_poly),
             r2_score(y_test, y_pred_tree),
@@ -160,48 +154,43 @@ evaluations = pd.DataFrame(
         ],
     }
 )
+
 # 打印时每列数据左对齐
 pd.set_option("display.unicode.ambiguous_as_wide", True)
 pd.set_option("display.unicode.east_asian_width", True)
-pd.set_option("display.width", 180)
+pd.set_option("display.width", 200)
 print(f"模型评价结果:\n{evaluations.to_string(index=False)}")
 
-# 画两个子图，分别用散点图表示回归模型预测平时成绩和最终成绩的关系，回归模型预测期末成绩和最终成绩的关系
-# 第一行两个子图表示线性回归结果，只画散点
+# 画四个子图，每个子图用散点图表示一种回归模型预测平时成绩和期末成绩的关系
 plt.rcParams["font.sans-serif"] = ["STHeiti"]  # 用来正常显示中文标签
 plt.rcParams["axes.unicode_minus"] = False  # 用来正常显示负号
-fig, axes = plt.subplots(2, 2, figsize=(12, 10))
-axes[0][0].scatter(X_train["平时成绩"], y_train, label="训练集")
-axes[0][0].scatter(X_test["平时成绩"], y_test, label="测试集")
-axes[0][0].scatter(X_test["平时成绩"], y_pred, label="线性回归模型", color="red")
-axes[0][0].set_xlabel("平时成绩")
-axes[0][0].set_ylabel("最终成绩")
-axes[0][0].set_title("线性回归模型预测期末成绩和最终成绩的关系")
-axes[0][0].legend(loc="best")
-axes[0][1].scatter(X_train["期末成绩"], y_train, label="训练集")
-axes[0][1].scatter(X_test["期末成绩"], y_test, label="测试集")
-axes[0][1].scatter(X_test["期末成绩"], y_pred, label="线性回归模型", color="red")
-axes[0][1].set_xlabel("期末成绩")
-axes[0][1].set_ylabel("最终成绩")
-axes[0][1].set_title("线性回归模型预测期末成绩和最终成绩的关系")
-axes[0][1].legend(loc="best")
-# 第二行两个子图表示支持向量回归结果，只画散点
-axes[1][0].scatter(X_train["平时成绩"], y_train, label="训练集")
-axes[1][0].scatter(X_test["平时成绩"], y_test, label="测试集")
-axes[1][0].scatter(
-    X_test["平时成绩"], y_pred_svr, label="支持向量回归模型", color="red"
-)
-axes[1][0].set_xlabel("平时成绩")
-axes[1][0].set_ylabel("最终成绩")
-axes[1][0].set_title("支持向量回归模型预测期末成绩和最终成绩的关系")
-axes[1][0].legend(loc="best")
-axes[1][1].scatter(X_train["期末成绩"], y_train, label="训练集")
-axes[1][1].scatter(X_test["期末成绩"], y_test, label="测试集")
-axes[1][1].scatter(
-    X_test["期末成绩"], y_pred_svr, label="支持向量回归模型", color="red"
-)
-axes[1][1].set_xlabel("期末成绩")
-axes[1][1].set_ylabel("最终成绩")
-axes[1][1].set_title("支持向量回归模型预测期末成绩和最终成绩的关系")
-axes[1][1].legend(loc="best")
+fig, axes = plt.subplots(2, 2, figsize=(10, 9))
+# 第一个子图用散点图表示线性回归预测结果
+axes[0, 0].scatter(X_test, y_test, label="真实值")
+axes[0, 0].scatter(X_test, y_pred, label="预测值", color="red")
+axes[0, 0].set_title("线性回归")
+axes[0, 0].set_xlabel("平时成绩")
+axes[0, 0].set_ylabel("期末成绩")
+axes[0, 0].legend()
+# 第二个子图用散点图表示多项式回归预测结果
+axes[0, 1].scatter(X_test, y_test, label="真实值")
+axes[0, 1].scatter(X_test, y_pred_poly, label="预测值", color="red")
+axes[0, 1].set_title("多项式回归")
+axes[0, 1].set_xlabel("平时成绩")
+axes[0, 1].set_ylabel("期末成绩")
+axes[0, 1].legend()
+# 第三个子图用散点图表示决策树回归预测结果
+axes[1, 0].scatter(X_test, y_test, label="真实值")
+axes[1, 0].scatter(X_test, y_pred_tree, label="预测值", color="red")
+axes[1, 0].set_title("决策树回归")
+axes[1, 0].set_xlabel("平时成绩")
+axes[1, 0].set_ylabel("期末成绩")
+axes[1, 0].legend()
+# 第四个子图用散点图表示支持向量回归预测结果
+axes[1, 1].scatter(X_test, y_test, label="真实值")
+axes[1, 1].scatter(X_test, y_pred_svr, label="预测值", color="red")
+axes[1, 1].set_title("支持向量回归")
+axes[1, 1].set_xlabel("平时成绩")
+axes[1, 1].set_ylabel("期末成绩")
+axes[1, 1].legend()
 plt.show()
