@@ -3,7 +3,6 @@
 import os
 import pandas as pd
 from matplotlib import pyplot as plt
-import myMlModule as mmm
 
 
 path = "./"
@@ -163,10 +162,9 @@ evaluations = pd.DataFrame(
     }
 )
 # 打印时每列数据左对齐
-# df.style.set_properties(**{"text-align": "left"})
 pd.set_option("display.unicode.ambiguous_as_wide", True)
 pd.set_option("display.unicode.east_asian_width", True)
-pd.set_option("display.width", 150)
+pd.set_option("display.width", 180)
 print(f"模型评价结果:\n{evaluations.to_string(index=False)}")
 
 # 画两个子图，分别用散点图表示回归模型预测平时成绩和最终成绩的关系，回归模型预测期末成绩和最终成绩的关系
