@@ -3,6 +3,7 @@
 import os
 import pandas as pd
 from matplotlib import pyplot as plt
+import myMlModule as mmm
 
 
 path = "./"
