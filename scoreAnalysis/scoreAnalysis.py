@@ -2,7 +2,7 @@
 
 import os
 import pandas as pd
-from matplotlib import pyplot as plt
+import matplotlib.pyplot as plt
 
 
 path = "./"
@@ -84,15 +84,14 @@ plt.axvline(df["最终成绩"].mean(), color="red", linestyle="--", label="期�
 plt.axvline(
     df["最终成绩"].mean() + df["最终成绩"].std(),
     color="green",
-    linestyle="--",
+    linestyle="-.",
     label="期望值 ± 标准差",
 )
-plt.axvline(df["最终成绩"].mean() - df["最终成绩"].std(), color="green", linestyle="--")
+plt.axvline(df["最终成绩"].mean() - df["最终成绩"].std(), color="green", linestyle="-.")
 plt.legend()
 plt.show()
 
 
-import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 from sklearn.preprocessing import PolynomialFeatures
