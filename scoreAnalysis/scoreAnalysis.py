@@ -97,6 +97,7 @@ from sklearn.preprocessing import PolynomialFeatures
 from sklearn.tree import DecisionTreeRegressor
 from sklearn.svm import SVR
 from sklearn.metrics import r2_score, mean_squared_error, mean_absolute_error
+from sklearn.model_selection import GridSearchCV
 
 # 特征和目标变量
 X = df[["平时成绩"]]
@@ -104,31 +105,70 @@ y = df["期末成绩"]
 
 # 划分训练集和测试集
 X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.2, random_state=66611
+    X, y, test_size=0.2, random_state=666
 )
 
 
-# 线性回归
+# 线性回归模型参数优化
 lr = LinearRegression()
+params = {"fit_intercept": [True, False]}
+grid_search = GridSearchCV(lr, params, cv=5)
+grid_search.fit(X_train, y_train)
+print(f"线性回归最佳参数：{grid_search.best_params_}")
+print(f"线性回归最佳模型：{grid_search.best_estimator_}")
+
+# 线性回归模型训练
 lr.fit(X_train, y_train)
 y_pred = lr.predict(X_test)
 
-# 多项式回归
-poly = PolynomialFeatures(degree=2)
+
+# 多项式回归模型参数优化
+scores = []
+degrees = [1, 2, 3, 4, 5]
+for degree in degrees:
+    poly = PolynomialFeatures(degree=degree)
+    X_poly = poly.fit_transform(X_train)
+    lr_poly = LinearRegression()
+    lr_poly.fit(X_poly, y_train)
+    y_pred_poly = lr_poly.predict(poly.fit_transform(X_test))
+    scores.append(r2_score(y_test, y_pred_poly))
+print(f"多项式回归最佳拟合度：{degrees[scores.index(max(scores))]}")
+
+# 多项式回归模型训练
+poly = PolynomialFeatures(degree=degrees[scores.index(max(scores))])
 X_poly = poly.fit_transform(X_train)
 lr_poly = LinearRegression()
 lr_poly.fit(X_poly, y_train)
 y_pred_poly = lr_poly.predict(poly.fit_transform(X_test))
 
-# 决策树回归
+# 决策树回归模型参数优化
 tree = DecisionTreeRegressor()
+params = {"max_depth": [2, 3, 4, 5, 6, 7, 8, 9, 10]}
+grid_search = GridSearchCV(tree, params, cv=5)
+grid_search.fit(X_train, y_train)
+print(f"决策树回归最佳参数：{grid_search.best_params_}")
+print(f"决策树回归最佳模型：{grid_search.best_estimator_}")
+
+# 决策树回归模型训练
 tree.fit(X_train, y_train)
 y_pred_tree = tree.predict(X_test)
 
-# 支持向量回归
+# 支持向量回归模型参数优化
 svr = SVR()
+params = {
+    "C": [0.1, 1, 10, 100, 1000],
+    "epsilon": [0.1, 0.5, 1, 2, 5, 10],
+    "kernel": ["rbf"],
+}
+grid_search = GridSearchCV(svr, params, cv=5)
+grid_search.fit(X_train, y_train)
+print(f"支持向量回归最佳参数：{grid_search.best_params_}")
+print(f"支持向量回归最佳模型：{grid_search.best_estimator_}")
+
+# 支持向量回归模型训练
 svr.fit(X_train, y_train)
 y_pred_svr = svr.predict(X_test)
+
 
 # 在一个DataFrame中存储所有模型的评价结果并打印
 evaluations = pd.DataFrame(
