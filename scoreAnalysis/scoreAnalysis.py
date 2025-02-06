@@ -234,3 +234,30 @@ axes[1, 1].set_xlabel("平时成绩")
 axes[1, 1].set_ylabel("期末成绩")
 axes[1, 1].legend()
 plt.show()
+
+
+# 使用 BP 神经网络进行训练
+from sklearn.neural_network import MLPRegressor
+
+mlp = MLPRegressor(hidden_layer_sizes=(100, 100, 100), max_iter=10000, random_state=42)
+mlp.fit(X_train, y_train)
+
+# 预测测试集的结果
+y_pred = mlp.predict(X_test)
+
+# 计算 MSE 误差
+from sklearn.metrics import mean_absolute_error
+
+mse = mean_absolute_error(y_test, y_pred)
+print(f"BP模型预测 MAE 误差为 {mse:.2f}")
+
+# 用散点图表示BP模型平时成绩与期末成绩的关系，包含预测值和真实值
+plt.rcParams["font.sans-serif"] = ["STHeiti"]  # 用来正常显示中文标签
+plt.rcParams["axes.unicode_minus"] = False  # 用来正常显示负号
+# 横坐标是平时成绩，纵坐标是期末成绩，蓝色显示真实值，红色显示预测值
+plt.scatter(X_test, y_test, label="真实值")
+plt.scatter(X_test, y_pred, c="red", label="预测值")
+plt.xlabel("平时成绩")
+plt.ylabel("期末成绩")
+plt.legend()
+plt.show()
