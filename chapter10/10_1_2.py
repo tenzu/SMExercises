@@ -1,4 +1,4 @@
-import chapter10module as c10m
+import chapter_10_module as c10m
 
 print(f"********** 10.1题 **********")
 print(f"********** 非弹性稳定性的解 **********\n")

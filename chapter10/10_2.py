@@ -1,4 +1,4 @@
-import chapter10module as c10m
+import chapter_10_module as c10m
  
 print(f"********** 10.2题 **********")
 
