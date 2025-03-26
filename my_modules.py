@@ -7,7 +7,6 @@ youngsModulus = 2.1e11
 poissonsRatio = 0.3
 x, y = sp.symbols("x y")
 
-
 # E1
 def E1(youngsModulus=2e11, poissonsRatio=0.3):
     return youngsModulus / (1 - poissonsRatio**2)
